@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>香港一日游计划 · 8.22 周六</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    background: #f5f0e8;
+    color: #2c2c2c;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    background: linear-gradient(135deg, #1a3a4a 0%, #2c6e7f 50%, #3a8a9a 100%);
+    color: #fff;
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "🇭🇰";
+    position: absolute;
+    bottom: -20px;
+    right: 20px;
+    font-size: 120px;
+    opacity: 0.08;
+  }
+  .hero h1 {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .hero .subtitle {
+    font-size: 15px;
+    opacity: 0.85;
+    letter-spacing: 1px;
+  }
+  .hero .date-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+
+  /* ===== Container ===== */
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+
+  /* ===== Budget Bar ===== */
+  .budget-overview {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .budget-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 6px solid #2c6e7f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .budget-circle .amount {
+    font-size: 24px;
+    font-weight: 800;
+    color: #2c6e7f;
+  }
+  .budget-circle .unit {
+    font-size: 11px;
+    color: #888;
+  }
+  .budget-text h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+  .budget-text p {
+    font-size: 13px;
+    color: #666;
+  }
+  .budget-note {
+    font-size: 12px;
+    color: #999;
+    margin-top: 4px;
+  }
+
+  /* ===== Section ===== */
+  .section {
+    margin-bottom: 36px;
+  }
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a3a4a;
+    margin-bottom: 16px;
+    padding-left: 14px;
+    border-left: 4px solid #e8635f;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ===== Record Store Cards ===== */
+  .store-card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+    transition: transform 0.2s;
+  }
+  .store-card:hover { transform: translateY(-2px); }
+  .store-header {
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .store-header.primary { background: linear-gradient(135deg, #e8635f, #d94e4a); color: #fff; }
+  .store-header.alt { background: linear-gradient(135deg, #4a7c8a, #3a6a78); color: #fff; }
+  .store-name {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .store-tag {
+    font-size: 12px;
+    background: rgba(255,255,255,0.2);
+    padding: 3px 10px;
+    border-radius: 12px;
+  }
+  .store-body {
+    padding: 18px 20px;
+    font-size: 14px;
+  }
+  .store-body p { margin-bottom: 8px; }
+  .store-body .label {
+    display: inline-block;
+    width: 60px;
+    color: #888;
+    font-size: 13px;
+  }
+  .store-body .value { color: #333; }
+  .store-highlight {
+    background: #f8f5f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #555;
+    border-left: 3px solid #e8635f;
+  }
+
+  /* ===== Timeline ===== */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: #ddd;
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 24px;
+  }
+  .tl-dot {
+    position: absolute;
+    left: -28px;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid #2c6e7f;
+    z-index: 1;
+  }
+  .tl-dot.food { border-color: #e8943f; }
+  .tl-dot.fun { border-color: #e8635f; }
+  .tl-dot.transit { border-color: #4a8ab0; }
+  .tl-time {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2c6e7f;
+    margin-bottom: 4px;
+  }
+  .tl-content {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 18px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .tl-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #1a3a4a;
+  }
+  .tl-desc {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+  }
+  .tl-desc .highlight {
+    background: #fff3cd;
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+  .tl-cost {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 12px;
+    background: #e8f5f0;
+    color: #2a7a5a;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+
+  /* ===== Budget Table ===== */
+  .budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    font-size: 14px;
+  }
+  .budget-table th {
+    background: #1a3a4a;
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .budget-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .budget-table tr:last-child td { border-bottom: none; }
+  .budget-table tr.total {
+    background: #f8f5f0;
+    font-weight: 800;
+  }
+  .budget-table tr.total td { color: #1a3a4a; font-size: 15px; }
+  .budget-table .cat { color: #666; }
+  .budget-table .amt { text-align: right; font-weight: 600; }
+
+  /* ===== Info Cards ===== */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 600px) {
+    .info-grid { grid-template-columns: 1fr; }
+  }
+  .info-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 18px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .info-card h4 {
+    font-size: 14px;
+    color: #1a3a4a;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .info-card ul {
+    list-style: none;
+    font-size: 13px;
+    color: #555;
+  }
+  .info-card li {
+    padding: 3px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+  .info-card li::before {
+    content: '•';
+    position: absolute;
+    left: 4px;
+    color: #e8635f;
+  }
+
+  /* ===== Tips ===== */
+  .tips-box {
+    background: #fff8e8;
+    border: 1px solid #f0d878;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: #665500;
+  }
+  .tips-box h4 {
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  .tips-box ul { padding-left: 18px; }
+  .tips-box li { margin-bottom: 4px; }
+
+  /* ===== Route Map ===== */
+  .route-map {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 24px;
+  }
+  .route-flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+  }
+  .route-stop {
+    background: #e8f0f5;
+    color: #1a3a4a;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .route-arrow {
+    color: #aaa;
+    font-size: 14px;
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: #aaa;
+  }
+
+  /* ===== Mobile Enhancements ===== */
+  @media (max-width: 480px) {
+    .hero { padding: 36px 16px 32px; }
+    .hero h1 { font-size: 26px; }
+    .hero .subtitle { font-size: 13px; }
+    .container { padding: 20px 14px 48px; }
+    .section-title { font-size: 18px; }
+    .budget-overview { padding: 18px; gap: 14px; }
+    .budget-circle { width: 84px; height: 84px; }
+    .budget-circle .amount { font-size: 20px; }
+    .store-header { padding: 14px 16px; }
+    .store-body { padding: 14px 16px; font-size: 13px; }
+    .tl-content { padding: 13px 14px; }
+    .tl-time { font-size: 12px; }
+    .tl-title { font-size: 14px; }
+    .tl-desc { font-size: 12.5px; }
+    .budget-table th { padding: 10px 12px; }
+    .budget-table td { padding: 9px 12px; }
+    .route-stop { padding: 5px 10px; font-size: 11px; }
+    .info-card { padding: 14px 14px; }
+    .info-card ul { font-size: 12.5px; }
+    .tips-box { padding: 14px 14px; font-size: 12.5px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <h1>🏙️ 香港一日游 · 旺角淘碟</h1>
+  <div class="subtitle">双人 AA · 人均 300 RMB 以内</div>
+  <div class="date-badge">📅 2026年8月22日（周六）</div>
+</div>
+
+<div class="container">
+
+  <!-- ===== BUDGET OVERVIEW ===== -->
+  <div class="budget-overview">
+    <div class="budget-circle">
+      <span class="amount">≤300</span>
+      <span class="unit">RMB/人</span>
+    </div>
+    <div class="budget-text">
+      <h3>预算总览</h3>
+      <p>人均 ≤ 300 RMB（≈ 330 HKD），双人 AA 总计 ≤ 600 RMB</p>
+      <p class="budget-note">* 不含跨境交通（高铁/口岸通行费），仅计算在港期间开销<br>* 不含晚餐（19:00 返程回深圳吃）<br>* 如购买黑胶/CD，需另留 100-400 HKD 预算</p>
+    </div>
+  </div>
+
+  <!-- ===== ROUTE MAP ===== -->
+  <div class="route-map">
+    <div style="font-size:14px;font-weight:700;color:#1a3a4a;margin-bottom:12px;text-align:center;">🗺️ 当日路线总览</div>
+    <div class="route-flow">
+      <span class="route-stop">福田口岸</span>
+      <span class="route-arrow">→</span>
+      <span class="route-stop">旺角·早餐+淘碟</span>
+      <span class="route-arrow">→</span>
+      <span class="route-stop">佐敦·下午茶</span>
+      <span class="route-arrow">→</span>
+      <span class="route-stop">尖沙咀·星光大道</span>
+      <span class="route-arrow">→</span>
+      <span class="route-stop">⛴️ 天星小轮</span>
+      <span class="route-arrow">→</span>
+      <span class="route-stop">中环·闲逛</span>
+      <span class="route-arrow">→</span>
+      <span class="route-stop">🌇 维港日落</span>
+      <span class="route-arrow">→</span>
+      <span class="route-stop">19:00 返程</span>
+    </div>
+  </div>
+
+  <!-- ===== RECORD STORE RECOMMENDATIONS ===== -->
+  <div class="section">
+    <div class="section-title">🎵 专辑店推荐 · 旺角淘碟</div>
+
+    <div class="store-card">
+      <div class="store-header primary">
+        <span class="store-name">信和中心 Sino Centre</span>
+        <span class="store-tag">⭐ 首推 · 淘碟圣地</span>
+      </div>
+      <div class="store-body">
+        <p><span class="label">地址</span><span class="value">弥敦道582-592号（近旺角站 E2 出口）</span></p>
+        <p><span class="label">交通</span><span class="value">港铁观塘线/荃湾线 · 旺角站，步行约 2 分钟</span></p>
+        <p><span class="label">主营</span><span class="value">唱片铺集中在 <strong>B1 地库、3楼、10楼</strong>：全新+二手 CD / 黑胶，港乐、日韩、欧美、华语全都有</span></p>
+        <p><span class="label">价格</span><span class="value">二手 CD 20-150 HKD，黑胶 50-400 HKD，越淘越便宜</span></p>
+        <p><span class="label">营业</span><span class="value">约 11:00-22:00（下午最热闹）</span></p>
+        <div class="store-highlight">
+          💡 淘碟路线：<strong>B1 地库先逛 Sky Music（M14-15）</strong>——信和最好逛的一家，港乐/Kpop/Jpop 齐全，明星都去过（店招全是签名）；隔壁 M12 Mini Shop 铺头仔；B16-17 回音阁镭射中心常有清货特价。<strong>然后直奔 10 楼</strong>——Music Life Room（1005）+ CD 经济特区（1004）是二手铺，绝版港乐、便宜好货都藏在这。重点：<strong>多数铺位只收现金</strong>，务必备足。
+        </div>
+      </div>
+    </div>
+
+    <div class="store-card">
+      <div class="store-header alt">
+        <span class="store-name">通菜街 · 节拍唱片 & 威威</span>
+        <span class="store-tag">备选·怀旧二连</span>
+      </div>
+      <div class="store-body">
+        <p><span class="label">地址</span><span class="value">旺角通菜街49号（威威）/ 53号（节拍唱片），女人街</span></p>
+        <p><span class="label">交通</span><span class="value">港铁旺角站步行约 5 分钟，离信和中心 10 分钟</span></p>
+        <p><span class="label">主营</span><span class="value">怀旧 CD / 黑胶 / DVD，粤语、国语、英文为主</span></p>
+        <p><span class="label">价格</span><span class="value">特价 CD 有惊喜，整体比信和略贵一点</span></p>
+        <div class="store-highlight">
+          💡 <strong>节拍唱片（53号）</strong>：种类多，适合信和逛完顺路扫；<strong>威威（49号）</strong>：更怀旧，港乐老歌星（哥哥、学友、校长那一代）的碟多。两家就隔几个铺位，10 分钟搞定，不专程跑也顺路。
+        </div>
+      </div>
+    </div>
+
+    <div class="store-card">
+      <div class="store-header alt">
+        <span class="store-name">CD Warehouse（旺角店）</span>
+        <span class="store-tag">备选·新碟品类全</span>
+      </div>
+      <div class="store-body">
+        <p><span class="label">地址</span><span class="value">弥敦道一带（连锁分店，导航最近的旺角店）</span></p>
+        <p><span class="label">主营</span><span class="value">全新 CD 为主，K-pop / J-pop / 欧美流行 / 华语，正版连锁</span></p>
+        <p><span class="label">价格</span><span class="value">新碟 CD 80-250 HKD</span></p>
+        <div class="store-highlight">
+          💡 如果想买全新未拆封的专辑（比如追的团刚出新专），连锁店最稳妥，支持刷卡/支付宝。二手还是去信和中心划算。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TIMELINE ===== -->
+  <div class="section">
+    <div class="section-title">📋 详细行程</div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot transit"></div>
+        <div class="tl-time">08:00 - 09:15</div>
+        <div class="tl-content">
+          <div class="tl-title">🚶 过关入境 → 旺角</div>
+          <div class="tl-desc">
+            福田口岸过关 → 落马洲站搭东铁线 → 九龙塘换观塘线 → 旺角站<br>
+            <strong>建议：</strong>周六上午过关人少，8 点前到口岸基本不排队。全程车程约 40 分钟。<br>
+            <strong>支付：</strong>支付宝/微信"乘车码"切换香港可直接刷港铁，不用买八达通
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot food"></div>
+        <div class="tl-time">09:15 - 10:15</div>
+        <div class="tl-content">
+          <div class="tl-title">🍞 早餐 · 旺角金华冰厅</div>
+          <div class="tl-desc">
+            <strong>金华冰厅</strong>（旺角弼街47号）— 开业半个多世纪的怀旧茶餐厅<br>
+            <strong>必点：</strong>菠萝油（新鲜出炉，皮脆黄油多）+ 丝袜奶茶 / 蛋挞<br>
+            奶茶 + 菠萝油 + 蛋挞的"金三角"组合约 40 HKD，香港人的经典早餐<br>
+            吃饱再去淘碟，战斗力才够
+          </div>
+          <span class="tl-cost">人均 35-45 HKD</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot fun"></div>
+        <div class="tl-time">10:15 - 12:30</div>
+        <div class="tl-content">
+          <div class="tl-title">🎵 旺角淘碟 · 重头戏</div>
+          <div class="tl-desc">
+            <strong>第一站：信和中心</strong>（弥敦道582-592号，旺角站 E2 出口）<br>
+            — B1 地库：Sky Music（M14-15）港乐/Kpop 最全，回音阁镭射中心（B16-17）常清货<br>
+            — 10 楼：Music Life Room（1005）+ CD 经济特区（1004）——二手绝版在这层<br>
+            — 港乐、日韩、欧美分区摆，慢慢翻慢慢淘<br>
+            <strong>第二站（顺路）：</strong>通菜街女人街——节拍唱片（53号）+ 威威（49号）<br>
+            <span class="highlight">重点：小店大多只收现金，出门前备足 300-500 HKD；香港楼层是英式算法，2F=内地3楼</span>
+          </div>
+          <span class="tl-cost">免费逛（买碟另算）</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot food"></div>
+        <div class="tl-time">12:30 - 13:30</div>
+        <div class="tl-content">
+          <div class="tl-title">🍜 午餐 · 旺角/油麻地</div>
+          <div class="tl-desc">
+            沿弥敦道往南走（到油麻地约 15 分钟），边走边找吃的<br>
+            <strong>选项 A：油麻地熟食中心</strong>（庙街旁市政大厦）<br>
+            — 本地人食堂，碟头饭/烧味饭 40-55 HKD，最省钱<br>
+            <strong>选项 B：旺角街边小吃</strong><br>
+            — 咖喱鱼蛋、鸡蛋仔、煎酿三宝、碗仔翅，边走边吃<br>
+            <strong>选项 C：佐敦茶餐厅</strong><br>
+            — 沙嗲牛肉面 + 冻柠茶，约 45-55 HKD
+          </div>
+          <span class="tl-cost">人均 40-60 HKD</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot fun"></div>
+        <div class="tl-time">13:30 - 14:15</div>
+        <div class="tl-content">
+          <div class="tl-title">🚶 佐敦漫步 · 庙街日市</div>
+          <div class="tl-desc">
+            <strong>庙街（白天版）：</strong>算命摊、小百货、凉茶铺，比晚上安静但更有生活气<br>
+            <strong>油麻地警署旧址：</strong>TVB 剧集经典取景地，拍照打卡（免费）<br>
+            <strong>榕树头：</strong>油麻地地标，大树下坐一会歇脚<br>
+            全程步行，慢悠悠感受九龙市井
+          </div>
+          <span class="tl-cost">免费</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot food"></div>
+        <div class="tl-time">14:15 - 15:15</div>
+        <div class="tl-content">
+          <div class="tl-title">🥤 下午茶 · 澳洲牛奶公司（最后一餐）</div>
+          <div class="tl-desc">
+            <strong>澳洲牛奶公司</strong>（佐敦白加士街47号）<br>
+            — 香港茶餐厅传奇，炒蛋多士 + 蛋白炖鲜牛奶<br>
+            — 炒蛋多士约 20 HKD，炖奶约 20 HKD<br>
+            <strong>注意：</strong>只收现金，排队 10-20 分钟，翻台极快<br>
+            <span class="highlight">今天最后一顿正餐，点足一点，晚上回深圳再吃夜宵</span>
+          </div>
+          <span class="tl-cost">人均 30-40 HKD</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot fun"></div>
+        <div class="tl-time">15:15 - 16:15</div>
+        <div class="tl-content">
+          <div class="tl-title">🌊 尖沙咀 · 星光大道</div>
+          <div class="tl-desc">
+            佐敦沿弥敦道步行 15 分钟到尖沙咀，或地铁 1 站<br>
+            <strong>星光大道：</strong>李小龙铜像、手印大道、维港全景<br>
+            <strong>尖沙咀钟楼：</strong>百年历史地标，拍照打卡<br>
+            <strong>1881 Heritage：</strong>前水警总部，维多利亚式建筑，免费参观<br>
+            逛完往码头走，天星码头就在星光大道尽头
+          </div>
+          <span class="tl-cost">免费</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot transit"></div>
+        <div class="tl-time">16:15 - 16:30</div>
+        <div class="tl-content">
+          <div class="tl-title">⛴️ 天星小轮 · 尖沙咀 → 中环</div>
+          <div class="tl-desc">
+            天星码头就在星光大道尽头，上船走人<br>
+            <strong>票价：</strong>下层 4.2 HKD / 上层 5.0 HKD（现金或八达通）<br>
+            <strong>航程：</strong>约 8-10 分钟<br>
+            维港最经典的体验——坐在上层靠窗，海风 + 天际线，5 块钱值回票价<br>
+            <strong>注意：</strong>天星小轮不收乘车码，提前备好零钱或八达通
+          </div>
+          <span class="tl-cost">人均 5 HKD</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot fun"></div>
+        <div class="tl-time">16:30 - 18:00</div>
+        <div class="tl-content">
+          <div class="tl-title">🏙️ 中环闲逛 · 免费看新香港</div>
+          <div class="tl-desc">
+            <strong>中环街市：</strong>百年市场活化改造，香港最新打卡地标，免费<br>
+            <strong>大馆（Tai Kwun）：</strong>前中区警署建筑群，看展览、逛监狱旧址，免费<br>
+            <strong>半山扶梯：</strong>全球最长户外有盖扶梯，坐一段感受老香港<br>
+            三个都在步行范围内，按体力挑 1-2 个逛
+          </div>
+          <span class="tl-cost">免费</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot fun"></div>
+        <div class="tl-time">18:00 - 18:45</div>
+        <div class="tl-content">
+          <div class="tl-title">🌇 中环海滨日落 · 收官</div>
+          <div class="tl-desc">
+            走到中环海滨长廊 / 添马公园，正对尖沙咀<br>
+            <strong>8 月日落约 19:00</strong>，从 18:00 开始天色渐染，看着维港华灯初上<br>
+            对岸尖沙咀的摩天大楼会陆续亮灯，比白天更有味道<br>
+            <strong>拍照推荐位：</strong>添马公园海滨草坪 / 中环海滨长廊
+          </div>
+          <span class="tl-cost">免费</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot transit"></div>
+        <div class="tl-time">18:45 - 20:15</div>
+        <div class="tl-content">
+          <div class="tl-title">🚇 返程 · 金钟直达福田口岸</div>
+          <div class="tl-desc">
+            步行 10 分钟到 <strong>金钟站</strong>（中环走过去）<br>
+            搭 <strong>东铁线直达落马洲</strong>——2022 年过海段通车后不用换乘！<br>
+            <strong>时间：</strong>车程约 50 分钟 + 过关 10-20 分钟<br>
+            <strong>预计 20:00-20:30 到达福田口岸</strong>，19:00 前后上车，符合"7 点返程"<br>
+            周六晚上返程人流较多，上车后可以先排过关队伍
+          </div>
+          <span class="tl-cost">港铁约 40-60 HKD</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== BUDGET BREAKDOWN ===== -->
+  <div class="section">
+    <div class="section-title">💰 预算明细（人均）</div>
+    <table class="budget-table">
+      <thead>
+        <tr>
+          <th>项目</th>
+          <th style="text-align:right;">金额（HKD）</th>
+          <th style="text-align:right;">约 RMB</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cat">🚇 港铁交通（往返+市内）</td>
+          <td class="amt">40 - 60</td>
+          <td class="amt">36 - 54</td>
+        </tr>
+        <tr>
+          <td class="cat">⛴️ 天星小轮</td>
+          <td class="amt">5</td>
+          <td class="amt">4.5</td>
+        </tr>
+        <tr>
+          <td class="cat">🍞 早餐（金华冰厅）</td>
+          <td class="amt">35 - 45</td>
+          <td class="amt">32 - 41</td>
+        </tr>
+        <tr>
+          <td class="cat">🍜 午餐（熟食中心/小吃）</td>
+          <td class="amt">40 - 60</td>
+          <td class="amt">36 - 54</td>
+        </tr>
+        <tr>
+          <td class="cat">🥤 下午茶（澳牛，最后一餐）</td>
+          <td class="amt">30 - 40</td>
+          <td class="amt">27 - 36</td>
+        </tr>
+        <tr>
+          <td class="cat">🧃 饮料 / 水 / 零食</td>
+          <td class="amt">10 - 20</td>
+          <td class="amt">9 - 18</td>
+        </tr>
+        <tr class="total">
+          <td>合计（不含买碟）</td>
+          <td class="amt">160 - 230</td>
+          <td class="amt">144 - 207</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px;color:#888;margin-top:10px;">
+      ✅ 人均约 144-207 RMB，控制在 300 以内，省下的钱全给淘碟<br>
+      🎵 买碟预算：信和中心二手 CD 20-150 HKD，黑胶 50-400 HKD；新碟连锁店 80-250 HKD
+    </p>
+  </div>
+
+  <!-- ===== TRANSPORTATION & TIPS ===== -->
+  <div class="section">
+    <div class="section-title">🚇 交通 & 生活指南</div>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>🚇 交通方式</h4>
+        <ul>
+          <li><strong>过关：</strong>福田口岸（最推荐，港铁直达）或罗湖口岸</li>
+          <li><strong>支付：</strong>支付宝/微信搜索"乘车码"切换到香港，可刷港铁和巴士</li>
+          <li><strong>八达通：</strong>便利店可买旅客版，押金 50 HKD 可退；天星小轮需要它或现金</li>
+          <li><strong>天星小轮：</strong>现金或八达通，不接受乘车码</li>
+          <li><strong>返程路线：</strong>金钟站 → 东铁线直达落马洲（约 50 分钟，不用换乘）</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>💰 可能的额外开销</h4>
+        <ul>
+          <li><strong>八达通卡押金：</strong>50 HKD（离港可退）</li>
+          <li><strong>流量/电话卡：</strong>如需上网，约 30-50 HKD/张</li>
+          <li><strong>买碟：</strong>二手 CD 20-150 HKD，黑胶 50-400 HKD，新碟 80-250 HKD</li>
+          <li><strong>雨伞/防晒：</strong>8 月香港又热又多雨，自带省钱</li>
+          <li><strong>纪念品/零食：</strong>看个人，建议预算 0-50 HKD</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>🍜 省钱技巧</h4>
+        <ul>
+          <li>茶餐厅早餐套餐比单点便宜 30%</li>
+          <li>熟食中心（市政大厦）比街边餐厅便宜一半</li>
+          <li>便利店买水（7-11/OK）比餐厅便宜</li>
+          <li>淘碟优先二手（信和中心），比连锁店新碟便宜一半以上</li>
+          <li>大部分景点免费，不用买门票</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>⚠️ 注意事项</h4>
+        <ul>
+          <li><strong>淘碟现金：</strong>信和中心多数铺位只收现金，备 300-500 HKD</li>
+          <li><strong>台风季：</strong>8 月是台风季，出发前查天气，天星小轮可能停航</li>
+          <li><strong>带伞：</strong>随时可能阵雨</li>
+          <li><strong>穿鞋：</strong>一天走很多路，穿舒适的运动鞋</li>
+          <li><strong>充电宝：</strong>必带，拍照耗电快</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TIPS BOX ===== -->
+  <div class="tips-box">
+    <h4>📌 行程弹性建议</h4>
+    <ul>
+      <li>淘碟是重头戏，信和中心留足 1.5-2 小时；如果淘上瘾了，可以砍掉中环闲逛直接去海滨</li>
+      <li>信和中心 11 点后铺位陆续开齐；先逛 B1 再上 10 楼二手铺，最后顺路通菜街</li>
+      <li>看中碟先淘宝比个价——香港店都识货，但汇率+特价还是有赚头，全新拆封能捡漏</li>
+      <li>如果预算紧张想买碟，午餐选熟食中心（40 HKD），能把总开销压到 140 RMB 以内</li>
+      <li>18:00 前后记得回中环海滨等日落——这是返程前最值得的一站</li>
+      <li>想淘日韩专辑又没淘到，返程前路过金钟站可顺路看一眼太古广场 CD Warehouse</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    Made with ❤️ · 香港一日游计划 · 2026.08.22
+  </div>
+
+</div>
+
+</body>
+</html>
